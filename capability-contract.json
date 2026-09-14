@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "minimum": {
+    "sillytavern": "1.18.0",
+    "tavernHelper": null
+  },
+  "requirements": [
+    {
+      "id": "host-context",
+      "owner": "sillytavern",
+      "symbol": "SillyTavern.getContext",
+      "required": true,
+      "fallback": null
+    },
+    {
+      "id": "extension-settings",
+      "owner": "sillytavern",
+      "symbol": "SillyTavern.getContext().extensionSettings",
+      "required": true,
+      "fallback": null
+    },
+    {
+      "id": "debounced-settings-save",
+      "owner": "sillytavern",
+      "symbol": "SillyTavern.getContext().saveSettingsDebounced",
+      "required": true,
+      "fallback": null
+    },
+    {
+      "id": "request-headers",
+      "owner": "sillytavern",
+      "symbol": "SillyTavern.getContext().getRequestHeaders",
+      "required": true,
+      "fallback": null
+    },
+    {
+      "id": "chat-media-normalizer",
+      "owner": "sillytavern",
+      "symbol": "SillyTavern.getContext().ensureMessageMediaIsArray",
+      "required": false,
+      "fallback": "Use the rendered chat image controls, or let the user select an image file from the phone."
+    },
+    {
+      "id": "chat-image-controls",
+      "owner": "sillytavern",
+      "symbol": "DOM:#chat .mes_img_controls",
+      "required": false,
+      "fallback": "Use the floating action button and select an image file from the phone."
+    },
+    {
+      "id": "image-upload-route",
+      "owner": "sillytavern",
+      "symbol": "POST /api/images/upload",
+      "required": false,
+      "fallback": "Keep the generated image in the result preview with download/share actions."
+    },
+    {
+      "id": "chat-message-render",
+      "owner": "sillytavern",
+      "symbol": "SillyTavern.getContext().addOneMessage",
+      "required": false,
+      "fallback": "Do not claim chat persistence; keep the result in the preview."
+    },
+    {
+      "id": "chat-message-events",
+      "owner": "sillytavern",
+      "symbol": "SillyTavern.getContext().eventSource.emit + eventTypes.MESSAGE_RECEIVED + eventTypes.CHARACTER_MESSAGE_RENDERED",
+      "required": false,
+      "fallback": "Render through addOneMessage when available; otherwise keep the result in the preview."
+    },
+    {
+      "id": "chat-save-coordinator",
+      "owner": "sillytavern",
+      "symbol": "SillyTavern.getContext().saveChat",
+      "required": false,
+      "fallback": "Keep the result in preview; do not bypass the host save coordinator with a direct full-chat overwrite."
+    },
+    {
+      "id": "chat-save-roundtrip",
+      "owner": "sillytavern",
+      "symbol": "POST /api/chats/get + POST /api/chats/group/get",
+      "required": false,
+      "fallback": "Do not claim chat persistence until the saved message can be read back from the host."
+    }
+  ],
+  "browserCapabilities": [
+    {
+      "id": "cross-tab-paid-lock",
+      "symbol": "navigator.locks",
+      "required": false,
+      "fallback": "Use the persistent localStorage guard and permit paid generation from only one browser tab."
+    },
+    {
+      "id": "mobile-share",
+      "symbol": "navigator.share",
+      "required": false,
+      "fallback": "Use the standard download action."
+    }
+  ],
+  "providerCapabilities": [
+    {
+      "id": "image-edit-cors",
+      "symbol": "HTTPS image edit endpoint with Authorization CORS support",
+      "required": true,
+      "verification": "2026-09-14: Venice OPTIONS returns wildcard Allow-Headers without explicit Authorization; desktop in-app Chromium received 401 with an invalid test key. Android Chrome CORS and actual paid edit remain untested. Other providers require their own CORS support."
+    }
+  ]
+}

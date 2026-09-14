@@ -1,0 +1,414 @@
+#cloud-realify-root,
+#cloud-realify-root * {
+    box-sizing: border-box;
+}
+
+#cloud-realify-root {
+    position: fixed;
+    inset: 0;
+    z-index: 10990;
+    pointer-events: none;
+}
+
+#cloud-realify-root [hidden] {
+    display: none !important;
+}
+
+.cloud-realify__fab {
+    position: absolute;
+    right: max(14px, env(safe-area-inset-right));
+    bottom: calc(92px + env(safe-area-inset-bottom));
+    z-index: 10990;
+    min-height: 44px;
+    max-width: min(52vw, 180px);
+    padding: 10px 16px;
+    overflow: hidden;
+    color: #fff;
+    font: inherit;
+    font-weight: 700;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
+    background: linear-gradient(135deg, #5755e7, #8c4ad9);
+    border: 1px solid rgb(255 255 255 / 28%);
+    border-radius: 999px;
+    box-shadow: 0 8px 28px rgb(0 0 0 / 34%);
+    touch-action: manipulation;
+    pointer-events: auto;
+}
+
+.cloud-realify__fab:focus-visible,
+.cloud-realify button:focus-visible,
+.cloud-realify input:focus-visible,
+.cloud-realify summary:focus-visible,
+.cloud-realify select:focus-visible,
+.cloud-realify textarea:focus-visible {
+    outline: 3px solid #8ec5ff;
+    outline-offset: 2px;
+}
+
+.cloud-realify__fab--disabled {
+    color: rgb(255 255 255 / 82%);
+    background: #555;
+}
+
+.cloud-realify__overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 11000;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 0;
+    overflow: hidden;
+    color: var(--SmartThemeBodyColor, #f4f4f5);
+    background: rgb(0 0 0 / 58%);
+    backdrop-filter: blur(3px);
+    pointer-events: auto;
+}
+
+.cloud-realify__sheet {
+    width: 100%;
+    max-height: min(92dvh, 960px);
+    padding: 14px 14px calc(16px + env(safe-area-inset-bottom));
+    overflow: auto;
+    overscroll-behavior: contain;
+    color: var(--SmartThemeBodyColor, #f4f4f5);
+    background: var(--SmartThemeBlurTintColor, #202028);
+    border: 1px solid var(--SmartThemeBorderColor, rgb(255 255 255 / 20%));
+    border-bottom: 0;
+    border-radius: 18px 18px 0 0;
+    box-shadow: 0 -16px 48px rgb(0 0 0 / 42%);
+}
+
+.cloud-realify__header {
+    position: sticky;
+    top: -14px;
+    z-index: 2;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 0 10px;
+    background: var(--SmartThemeBlurTintColor, #202028);
+}
+
+.cloud-realify__title,
+.cloud-realify__result h3 {
+    margin: 0;
+    color: inherit;
+    font: inherit;
+    font-size: 1.16rem;
+    font-weight: 750;
+}
+
+.cloud-realify__icon-button,
+.cloud-realify__secondary-button,
+.cloud-realify__primary-button,
+.cloud-realify__confirm-paid-button {
+    min-height: 42px;
+    padding: 9px 13px;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+    background: rgb(255 255 255 / 8%);
+    border: 1px solid var(--SmartThemeBorderColor, rgb(255 255 255 / 24%));
+    border-radius: 10px;
+    touch-action: manipulation;
+}
+
+.cloud-realify__icon-button {
+    min-width: 64px;
+}
+
+.cloud-realify__primary-button {
+    width: 100%;
+    color: #fff;
+    font-weight: 750;
+    background: linear-gradient(135deg, #5755e7, #8c4ad9);
+    border-color: rgb(255 255 255 / 24%);
+}
+
+.cloud-realify__confirm-paid-button {
+    width: 100%;
+    margin-bottom: 8px;
+    color: #fff1c2;
+    font-weight: 750;
+    background: rgb(173 98 21 / 72%);
+    border-color: rgb(255 215 140 / 55%);
+}
+
+.cloud-realify button:disabled,
+.cloud-realify input:disabled,
+.cloud-realify select:disabled,
+.cloud-realify textarea:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+}
+
+.cloud-realify__provider-status,
+.cloud-realify__source-label,
+.cloud-realify__boundary-note,
+.cloud-realify__status {
+    margin: 8px 0;
+    overflow-wrap: anywhere;
+    font-size: 0.88rem;
+    line-height: 1.45;
+}
+
+.cloud-realify__provider-status {
+    padding: 8px 10px;
+    color: rgb(255 255 255 / 82%);
+    background: rgb(255 255 255 / 6%);
+    border-radius: 9px;
+}
+
+.cloud-realify__provider-status[data-kind="success"] {
+    color: #a9f0c2;
+}
+
+.cloud-realify__provider-status[data-kind="warning"] {
+    color: #ffe0a0;
+}
+
+.cloud-realify__provider-status[data-kind="error"] {
+    color: #ffb1b1;
+}
+
+.cloud-realify__source-block,
+.cloud-realify__connection,
+.cloud-realify__settings,
+.cloud-realify__result {
+    margin-top: 12px;
+    padding: 12px;
+    background: rgb(255 255 255 / 5%);
+    border: 1px solid var(--SmartThemeBorderColor, rgb(255 255 255 / 16%));
+    border-radius: 12px;
+}
+
+.cloud-realify__source-image,
+.cloud-realify__result-image {
+    display: block;
+    width: auto;
+    max-width: 100%;
+    max-height: 42dvh;
+    margin: 0 auto 10px;
+    object-fit: contain;
+    background: #111;
+    border-radius: 9px;
+}
+
+.cloud-realify__source-placeholder {
+    min-height: 88px;
+    margin: 0 0 10px;
+    padding: 24px 16px;
+    color: rgb(255 255 255 / 68%);
+    text-align: center;
+    background: rgb(0 0 0 / 20%);
+    border: 1px dashed rgb(255 255 255 / 24%);
+    border-radius: 9px;
+}
+
+.cloud-realify__button-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 8px;
+}
+
+.cloud-realify__settings {
+    display: grid;
+    gap: 12px;
+}
+
+.cloud-realify__connection summary {
+    min-height: 36px;
+    padding: 6px 0;
+    font-weight: 700;
+    cursor: pointer;
+    touch-action: manipulation;
+}
+
+.cloud-realify__connection-fields {
+    display: grid;
+    gap: 10px;
+    min-width: 0;
+    margin-top: 8px;
+}
+
+.cloud-realify__connection-note {
+    margin: 0;
+    color: color-mix(in srgb, var(--SmartThemeBodyColor, #f4f4f5) 78%, transparent);
+    overflow-wrap: anywhere;
+    font-size: 0.8rem;
+    line-height: 1.5;
+}
+
+.cloud-realify__field {
+    display: grid;
+    gap: 6px;
+    min-width: 0;
+}
+
+.cloud-realify__field-title {
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+.cloud-realify__field-hint {
+    margin: -8px 0 0 29px;
+    color: color-mix(in srgb, var(--SmartThemeBodyColor, #f4f4f5) 68%, transparent);
+    font-size: 0.8rem;
+    line-height: 1.4;
+}
+
+.cloud-realify__select,
+.cloud-realify__input,
+.cloud-realify__textarea {
+    width: 100%;
+    min-width: 0;
+    min-height: 42px;
+    padding: 9px 10px;
+    color: inherit;
+    font: inherit;
+    background: rgb(0 0 0 / 20%);
+    border: 1px solid var(--SmartThemeBorderColor, rgb(255 255 255 / 24%));
+    border-radius: 9px;
+}
+
+.cloud-realify__input {
+    /* Avoid mobile browsers zooming into URL/key fields on focus. */
+    font-size: 16px;
+}
+
+.cloud-realify__textarea {
+    min-height: 80px;
+    resize: vertical;
+}
+
+.cloud-realify__check-row {
+    display: flex;
+    gap: 9px;
+    align-items: center;
+    min-height: 34px;
+    cursor: pointer;
+}
+
+.cloud-realify__check-row input {
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    accent-color: #7775ff;
+}
+
+.cloud-realify__progress {
+    display: flex;
+    gap: 9px;
+    align-items: center;
+    margin-top: 12px;
+    padding: 10px 12px;
+    color: #cdd7ff;
+    background: rgb(87 85 231 / 16%);
+    border-radius: 9px;
+}
+
+.cloud-realify__spinner {
+    width: 18px;
+    height: 18px;
+    flex: 0 0 auto;
+    border: 2px solid rgb(255 255 255 / 28%);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: cloud-realify-spin 0.8s linear infinite;
+}
+
+@keyframes cloud-realify-spin {
+    to { transform: rotate(360deg); }
+}
+
+.cloud-realify__status {
+    padding: 10px 12px;
+    color: #cdd7ff;
+    background: rgb(105 132 255 / 14%);
+    border-radius: 9px;
+}
+
+.cloud-realify__status[data-kind="success"] {
+    color: #b9f5cd;
+    background: rgb(58 177 103 / 14%);
+}
+
+.cloud-realify__status[data-kind="warning"] {
+    color: #ffe0a0;
+    background: rgb(224 157 48 / 14%);
+}
+
+.cloud-realify__status[data-kind="error"] {
+    color: #ffc0c0;
+    background: rgb(211 70 70 / 15%);
+}
+
+.cloud-realify__result {
+    display: grid;
+    gap: 10px;
+}
+
+.cloud-realify__boundary-note {
+    color: rgb(255 255 255 / 68%);
+}
+
+.cloud-realify__footer {
+    position: sticky;
+    bottom: calc(-16px - env(safe-area-inset-bottom));
+    margin-top: 12px;
+    padding: 10px 0 calc(16px + env(safe-area-inset-bottom));
+    background: var(--SmartThemeBlurTintColor, #202028);
+}
+
+#chat .mes_img_controls .cloud-realify-image-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    min-height: 32px;
+    padding: 3px 7px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    cursor: pointer;
+    touch-action: manipulation;
+}
+
+@media (min-width: 720px) {
+    .cloud-realify__overlay {
+        align-items: center;
+        padding: 24px;
+    }
+
+    .cloud-realify__sheet {
+        width: min(580px, 100%);
+        max-height: min(88vh, 920px);
+        padding: 18px;
+        border-bottom: 1px solid var(--SmartThemeBorderColor, rgb(255 255 255 / 20%));
+        border-radius: 16px;
+    }
+
+    .cloud-realify__header {
+        top: -18px;
+        padding-top: 18px;
+    }
+
+    .cloud-realify__footer {
+        bottom: -18px;
+        padding-bottom: 18px;
+    }
+
+    .cloud-realify__fab {
+        right: 24px;
+        bottom: 24px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .cloud-realify__spinner {
+        animation-duration: 1.8s;
+    }
+}

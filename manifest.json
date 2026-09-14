@@ -1,0 +1,17 @@
+{
+  "display_name": "Cloud Realify 云端写实化",
+  "loading_order": 50,
+  "js": "index.js",
+  "css": "style.css",
+  "author": "OpenAI Codex",
+  "version": "0.2.0",
+  "homePage": "https://github.com/t81410-bot/cloud-realify",
+  "auto_update": false,
+  "minimum_client_version": "1.18.0",
+  "hooks": {
+    "activate": "onActivate",
+    "enable": "onEnable",
+    "disable": "onDisable",
+    "clean": "onClean"
+  }
+}
